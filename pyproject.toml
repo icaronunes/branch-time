@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "branch-time"
+version = "0.1.0"
+description = ""
+authors = ["Icaro Nunes"]
+readme = "README.md"
+packages = [{include = "branch_time"}]
+
+[tool.poetry.dependencies]
+python = "3.10.4"
+typer = "^0.7.0"
+typer-cli = "^0.0.13"
+click = "^8.0"
+pytest = "^7.3.1"
+
+[tool.poetry.scripts]
+script = "branch_time.jira:app"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.3.1"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.4.2"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[settings]
+known_third_party = ["pytest", "requests"]
+
+[tools.black]
+line-length = 120
+
+[tools.isort]
+profile = "black"
