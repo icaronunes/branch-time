@@ -7,7 +7,7 @@ from datetime import date, datetime
 
 import typer
 
-from GitRepositoryError import GitRepositoryError
+from branch_time.GitRepositoryError import GitRepositoryError
 
 app = typer.Typer(help="Awesome CLI user manager.")
 
@@ -50,7 +50,7 @@ def count_time(branch: str, last_line: str) -> str:
 
 @app.command()
 def getFile(
-    repository: str = typer.Option(None, "--repository", "-r", help="Repository git"),
+    repository: str = typer.Argument( "--repository", "-r", help="Repository git"),
     time_in_minute: int = typer.Option(
         5, "--time", "-t", help="Time for update current branch"
     ),
