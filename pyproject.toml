@@ -17,9 +17,11 @@ typer = "^0.7.0"
 typer-cli = "^0.0.13"
 click = "^8.0"
 pytest = "^7.3.1"
+rich = "^13.3.4"
 
 [tool.poetry.scripts]
 branchtime = "branch_time.jira:app"
+branch-time = "branch_time.jira:app"
 
 [tool.poetry.urls]
 "Repository" = "https://github.com/icaronunes/branch-time" 
