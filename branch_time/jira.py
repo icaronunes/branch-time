@@ -85,7 +85,8 @@ def getFile(
                     file.write(
                         f"Branch: {branch} - Time: {now.hour}:{now.minute}:{now.second}\n"
                     )
-                time.sleep(time_in_minute)
+                time.sleep(time_in_minute * 60)
+                
             except NotADirectoryError:
                 console.print("[red1]Directory not found")
                 sys.exit(1)
