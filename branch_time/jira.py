@@ -6,14 +6,16 @@ import time
 from datetime import date, datetime
 
 import typer
+from rich.console import Console
 
 from branch_time.GitRepositoryError import GitRepositoryError
 
 app = typer.Typer(help="Awesome CLI user manager.")
+console = Console()
 
 
 def is_not_same_branch(last_line, branch):
-    print(last_line)
+    console.print(last_line)
     return branch not in last_line
 
 
@@ -26,17 +28,17 @@ def last_line_on_file(file) -> str:
 
 
 def time_change(time):
-    hora, minutos, sec = time.split(":")
-    data_atual = datetime.now()
+    hora, min, sec = time.split(":")
+    data_current = datetime.now()
     data_obj = datetime(
-        data_atual.year,
-        data_atual.month,
-        data_atual.day,
+        data_current.year,
+        data_current.month,
+        data_current.day,
         int(hora),
-        int(minutos),
+        int(min),
         int(sec),
     )
-    hour, min, seg = f"{data_atual - data_obj}".split(":")[:3]
+    hour, min, seg = f"{data_current - data_obj}".split(":")[:3]
     return f"{hour} {min} {seg.split('.')[0]}"
 
 
@@ -50,7 +52,9 @@ def count_time(branch: str, last_line: str) -> str:
 
 @app.command()
 def getFile(
-    repository: str = typer.Argument( "--repository", "-r", help="Repository git"),
+    repository: str = typer.Argument(
+        ".", help="Repository git. Default: Current directory"
+    ),
     time_in_minute: int = typer.Option(
         5, "--time", "-t", help="Time for update current branch"
     ),
@@ -79,21 +83,19 @@ def getFile(
                 if is_not_same_branch(last_line, branch):
                     file.write(count_time(branch, last_line))
                     file.write(
-                        f"Branch:{branch} - Time:{now.hour}:{now.minute}:{now.second}\n"
+                        f"Branch: {branch} - Time: {now.hour}:{now.minute}:{now.second}\n"
                     )
                 time.sleep(time_in_minute)
             except NotADirectoryError:
-                print("Directory not found")
+                console.print("[red1]Directory not found")
                 sys.exit(1)
             except KeyboardInterrupt:
                 now = datetime.now()
                 file.write(f"FINISHED... {now.hour}:{now.minute}:{now.second}\n")
                 sys.exit(0)
             except GitRepositoryError as git_error:
-                print(git_error)
-                print("--repository parameter does not point to a git repository")
+                console.print(git_error)
+                console.print(
+                    "[red1]--repository parameter does not point to a git repository"
+                )
                 sys.exit(1)
-
-
-if __name__ == "__main__":
-    app()
