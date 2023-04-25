@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "branch-time"
-version = "0.1.2"
+version = "0.1.3"
 description = "Counts time in a branch"
 license="BeerWare"
 authors = ["Icaro Nunes"]
