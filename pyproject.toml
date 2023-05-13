@@ -12,7 +12,7 @@ classifiers= [
 ]
 
 [tool.poetry.dependencies]
-python = "^3"
+python = ">=3.8.0,<4"
 typer = "^0.7.0"
 typer-cli = "^0.0.13"
 click = "^8.0"
