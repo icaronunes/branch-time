@@ -65,6 +65,7 @@ def getFile(
         help="location where text file with timing of branch changes will be saved",
     ),
 ):
+    console.print("[red1]Time count started...\n\n")
     while True:
         with open(f"{output_file}.txt", "a+") as file:
             try:
