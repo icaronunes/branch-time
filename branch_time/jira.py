@@ -65,7 +65,7 @@ def getFile(
         help="location where text file with timing of branch changes will be saved",
     ),
 ):
-    console.print("[red1]Time count started...\n\n")
+    # console.print("[red1]Time count started...\n\n")
     while True:
         with open(f"{output_file}.txt", "a+") as file:
             try:
@@ -96,7 +96,7 @@ def getFile(
                 file.write(f"FINISHED... {now.hour}:{now.minute}:{now.second}\n")
                 sys.exit(0)
             except GitRepositoryError as git_error:
-                console.print(git_error)
+                console.print(git_error.message)
                 console.print(
                     "[red1]--repository parameter does not point to a git repository"
                 )

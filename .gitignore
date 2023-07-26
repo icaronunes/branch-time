@@ -3,3 +3,4 @@ poetry.lock
 __pycache__/
 dist/
 .vscode
+*-*-*.txt
